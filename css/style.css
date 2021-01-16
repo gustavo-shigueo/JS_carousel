@@ -1,0 +1,112 @@
+/** 
+ ** Edit the --width value and media queries here or
+ ** in ../scss/style.scss. This file is required for
+ ** the carousel to work, the code.min.css is not
+ ** (that's why I kept it minified), it's just for
+ ** the styles of the demonstration page
+ */
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  --width: 700px;
+  --shadows:
+    drop-shadow(1px 1px 3px rgba(0, 0, 0, .4))
+    drop-shadow(1px -1px 3px rgba(0, 0, 0, .4))
+    drop-shadow(-1px 1px 3px rgba(0, 0, 0, .4))
+    drop-shadow(1px -1px 3px rgba(0, 0, 0, .4));
+}
+
+svg {
+  width: 32px;
+  height: 32px;
+}
+svg path {
+  width: 32px;
+  height: 32px;
+}
+
+.carousel-container {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: var(--width);
+  overflow: hidden;
+  background-color: #f0f0f0;
+  height: calc(2 / 3 * var(--width));
+}
+.carousel-container .carousel-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.carousel-container .carousel-item {
+  min-width: 100%;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.carousel-container .bubbles {
+  width: 100%;
+  position: absolute;
+  bottom: 40px;
+  display: flex;
+  justify-content: center;
+}
+.carousel-container .bubbles label {
+  border-radius: 50%;
+  border: 2px solid white;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  filter: var(--shadows);
+}
+.carousel-container .bubbles label.active::after {
+  content: "";
+  position: absolute;
+  background: #fff;
+  width: 12px;
+  height: 12px;
+  top: 2px;
+  left: 2px;
+  border-radius: 50%;
+}
+.carousel-container .bubbles label:not(:last-child) {
+  margin-right: 40px;
+}
+.carousel-container .arrows {
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.carousel-container .arrows button {
+  filter: var(--shadows);
+  background: transparent;
+  border: none;
+  pointer-events: auto;
+  height: 48px;
+  width: 48px;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 3px solid white;
+}
+.carousel-container .arrows button#prevBtn {
+  transform: translateX(30px) rotateY(180deg);
+}
+.carousel-container .arrows button#nextBtn {
+  transform: translateX(-30px);
+}

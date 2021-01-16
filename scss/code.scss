@@ -1,0 +1,148 @@
+body {
+  margin: 0 auto;
+  background: #272822;
+  overflow-x: hidden;
+
+  .defaults .explanation {
+    max-width: 100%;
+  }
+
+  .explanation > h1 {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    text-align: center;
+  }
+
+  .explanation {
+    word-wrap: break-word;
+    color: white;
+    max-width: 45%;
+  }
+
+  .explanation, .carousel {
+    margin-top: 40px;
+  }
+
+  .keyword {
+    color: #66D9EF;
+  }
+
+  .operator {
+    color: #F92672;
+  }
+
+  .className, .attr {
+    color: #A6E22E;
+  }
+
+  .className {
+    border-bottom: 2px solid #A6E22E;
+  }
+
+  .string {
+    color: #E6DB5A;
+  }
+
+  .primitive {
+    color: #AE81F9;
+  }
+
+  pre {
+    max-width: 100%;
+    font-size: 1.35rem;
+    overflow: hidden;
+    word-wrap: break-word;
+    z-index: 15;
+
+    code {
+      word-wrap: break-word;
+    }
+  }
+
+  section {
+    margin: 20px;
+    position: relative;
+    background: lighten(#272822, 5%);
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 40px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, .4);
+  }
+}
+
+@media (max-width: 1400px) {
+  :root {
+    --width: 500px;
+  }
+}
+
+@media (max-width: 1400px) {
+  :root {
+    --width: 500px;
+    margin-top: 0;
+  }
+
+  .defaults .explanation {
+    margin-top: 20px;
+  }
+
+  section {
+    flex-direction: column;
+    margin-top: 35px;
+
+    .carousel {
+      margin-top: 65px;
+      margin-bottom: 0;
+      max-width: 100%;
+    }
+
+    .explanation {
+      order: 1;
+      margin-top: 0;
+      max-width: 100%;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  :root {
+    --width: 300px;
+  }
+
+  .explanation pre {
+    font-size: 1.1rem;
+  }
+
+  .carousel-container {
+    .bubbles {
+      bottom: 20px;
+    }
+
+    .arrows button {
+      width: 32px;
+      height: 32px;
+
+      &#prevBtn {
+        transform: translateX(20px) rotateY(180deg);
+      }
+
+      &#nextBtn {
+        transform: translateX(-20px);
+      }
+
+      img {
+        width: 21px;
+      }
+    }
+  }
+}
+
+@media (max-width: 520px) {
+  .explanation pre {
+    font-size: 1rem;
+  }
+}
