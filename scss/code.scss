@@ -8,7 +8,6 @@ body {
   }
 
   .explanation > h1 {
-    position: absolute;
     width: 100%;
     left: 0;
     top: 0;
@@ -63,7 +62,6 @@ body {
 
   section {
     margin: 20px;
-    position: relative;
     background: lighten(#272822, 5%);
     display: flex;
     align-items: center;
