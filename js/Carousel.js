@@ -153,7 +153,6 @@ export default class Carousel {
     btn.setAttribute('disabled', true)
     if (this.counter <= 0 || this.counter > this.numberOfItems) return this.cicle()
     this.counter += btn.className === 'nextBtn' ? 1 : -1
-    console.log(btn.className)
     this.slideItems()
   }
 
