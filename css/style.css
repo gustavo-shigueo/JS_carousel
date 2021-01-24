@@ -6,7 +6,7 @@
  ** the styles of the demonstration page
  */
 
-* {
+.carousel-container, .carousel-container * {
   box-sizing: border-box;
 }
 
@@ -20,11 +20,11 @@
     drop-shadow(1px -1px 3px rgba(0, 0, 0, .4));
 }
 
-svg {
+.carousel-container svg {
   width: 32px;
   height: 32px;
 }
-svg path {
+.carousel-container svg path {
   width: 32px;
   height: 32px;
 }
@@ -104,9 +104,9 @@ svg path {
   border-radius: 50%;
   border: 3px solid white;
 }
-.carousel-container .arrows button#prevBtn {
+.carousel-container .arrows button.prevBtn {
   transform: translateX(30px) rotateY(180deg);
 }
-.carousel-container .arrows button#nextBtn {
+.carousel-container .arrows button.nextBtn {
   transform: translateX(-30px);
 }

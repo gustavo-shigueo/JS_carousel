@@ -10,7 +10,7 @@
  */
 
 
-* {
+.carousel-container, .carousel-container * {
   box-sizing: border-box;
 }
 
@@ -24,7 +24,7 @@
     drop-shadow(1px -1px 3px rgba(0, 0, 0, .4));
 }
 
-svg {
+.carousel-container svg {
   width: 32px;
   height: 32px;
   path {
@@ -116,11 +116,11 @@ svg {
       border-radius: 50%;
       border: 3px solid white;
 
-      &#prevBtn {
+      &.prevBtn {
         transform: translateX(30px) rotateY(180deg);
       }
       
-      &#nextBtn {
+      &.nextBtn {
         transform: translateX(-30px);
       }
     }
