@@ -1,6 +1,6 @@
-class Carousel {
-  constructor (selector, { usesBubbles, usesArrows, timer } = { }) {
-    this.carousel = document.querySelector(selector)
+export default class Carousel {
+  constructor (element, { usesBubbles, usesArrows, timer } = { }) {
+    this.carousel = element instanceof HTMLElement ? element : document.querySelector(element)
     this.carouselItems = this.carousel.querySelectorAll('.carousel-item')
     this.itemsContainer = this.carousel.querySelector('.carousel-wrapper')
     this.numberOfItems = this.carouselItems.length
@@ -25,7 +25,7 @@ class Carousel {
     if (this.usesBubbles) this.addBubbles()
     if (this.usesArrows) this.addArrows()
 
-    if (this.timer) setInterval(() => this.handleTime(), this.timer)
+    this.timeOut = this.timer ? setInterval(() => this.handleTime(), this.timer) : undefined
 
     this.itemsContainer.addEventListener('transitionend', () => {
       this.cicle()
@@ -56,6 +56,11 @@ class Carousel {
     this.slideItems()
   }
 
+  resetTimer() {
+    clearInterval(this.timeOut)
+    this.timeOut = setInterval(() => this.handleTime(), this.timer);
+  }
+
   slideItems() {
     const amount = this.counter * this.itemSize
     this.itemsContainer.style.transition = 'transform 400ms ease-in-out'
@@ -79,8 +84,8 @@ class Carousel {
   }
 
   /**
-   * Bubble buttons (the ones that show wich item you are seeing, idk what they are
-   * actually called so I called them bubbles) code
+   * Bubble buttons code (the ones that show wich item you are seeing, idk what they are
+   * actually called so I called them bubbles)
    */
   addBubbles() {
     const bubblesContainer = document.createElement('div')
@@ -103,6 +108,7 @@ class Carousel {
 
   bubbleClick(e) {
     const bubble = e.target
+    if (this.timer) this.resetTimer()
     this.labels.forEach(el => el.classList.remove('active'))
     this.counter = Number(bubble.className.split('bubble')[1])
     this.slideItems()
@@ -126,31 +132,29 @@ class Carousel {
     const btn = document.createElement('button')
 
     divBtn.className = 'arrows'
-    
+
     const svg = this.generateSVG()
     btn.appendChild(svg)
 
     this.prevBtn = btn
     this.nextBtn = btn.cloneNode(true)
-    this.prevBtn.id = 'prevBtn'
-    this.nextBtn.id = 'nextBtn'
+    this.prevBtn.className = 'prevBtn'
+    this.nextBtn.className = 'nextBtn'
 
-    this.prevBtn.addEventListener('click', () => {
-      this.prevBtn.setAttribute('disabled', true)
-      if (this.counter <= 0) return this.cicle()
-      this.counter--
-      this.slideItems()
-    })
-
-    this.nextBtn.addEventListener('click', () => {
-      this.nextBtn.setAttribute('disabled', true)
-      if (this.counter > this.numberOfItems) return this.cicle()
-      this.counter++
-      this.slideItems()
-    })
+    this.prevBtn.addEventListener('click', () => this.arrowClick(this.prevBtn))
+    this.nextBtn.addEventListener('click', () => this.arrowClick(this.nextBtn))
 
     divBtn.append(this.prevBtn, this.nextBtn)
     this.carousel.appendChild(divBtn)
+  }
+
+  arrowClick(btn) {
+    if (this.timer) this.resetTimer()
+    btn.setAttribute('disabled', true)
+    if (this.counter <= 0 || this.counter > this.numberOfItems) return this.cicle()
+    this.counter += btn.className === 'nextBtn' ? 1 : -1
+    console.log(btn.className)
+    this.slideItems()
   }
 
   generateSVG() {

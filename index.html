@@ -6,7 +6,16 @@
   <title>Carousel</title>
   <link rel="stylesheet" href="./css/style.min.css">
   <link rel="stylesheet" href="./css/code.min.css">
-  <script src="./js/Carousel.js"></script>
+  <script type="module">
+    import Carousel from './js/Carousel.js'
+    const options = [
+      { timer: false },
+      { timer: 7000, usesBubbles: false },
+      { usesArrows: false },
+      { timer: 2000, usesBubbles: false, usesArrows: false }
+    ]
+    document.querySelectorAll('.carousel-container').forEach((elem, index) => new Carousel(elem, options[index]))
+  </script>
 </head>
 <body>
   <section class="defaults">
@@ -16,9 +25,10 @@
         <code>
 Simply calling
 
+<span class="operator">import</span> Carousel<span class="operator"> from </span><span class="string">'./js/Carousel.js'</span>
 <span class="keyword">const</span> carousel<span class="operator"> = new </span><span class="className">Carousel</span>(<span class="string">'.carousel-container'</span>)
 
-in your <span><</span><span class="operator">script</span>> tag will initiate a carousel with
+in your <span><</span><span class="operator">script</span>> tag or JS file will initiate a carousel with
 the following default values:
 {
   timer: <span class="primitive">5000</span>,
@@ -35,9 +45,18 @@ the following default values:
       <h1>Manual + arrow + bubble</h1>
       <pre>
         <code>
+
 <span><</span><span class="operator">head</span>>
-  <span><<span>!-- Importing the Carousel class --<span>></span>
-  <span><</span><span class="operator">script </span><span class="attr">src</span>=<span class="string">"./js/Carousel.js"</span><span>></span>
+  <span><</span>!-- This can be in a separate file if you want --<span>></span>
+  <span><</span><span class="operator">script </span><span class="attr">type</span>=<span class="string">"module"</span><span>></span>
+    // This import assumes you downloaded Carousel.js
+    // and saved it in a folder called js
+    <span class="operator">import</span> Carousel<span class="operator"> from </span><span class="string">'./js/Carousel.js'</span>
+    <span class="operator">new </span><span class="className">Carousel</span>(
+      <span class="string">'.carousel-container'</span>,
+      { timer: <span class="primitive">false</span> }
+    )
+  <span><</span>/<span class="operator">script</span><span>></span>
   <span><</span><span class="operator">link </span><span class="attr">rel</span>=<span class="string">"stylesheet" </span><span class="attr">href</span>=<span class="string">"./css/style.min.css"</span><span>></span>
 <span><</span>/<span class="operator">head</span>>
 <span><</span><span class="operator">body</span>>
@@ -51,13 +70,6 @@ the following default values:
 
     <span><</span>/<span class="operator">div</span><span>></span>
   <span><</span>/<span class="operator">div</span><span>></span>
-
-  <span><</span><span class="operator">script </span><span class="attr">defer</span><span>></span>
-    <span class="keyword">const</span> carousel<span class="operator"> = new </span><span class="className">Carousel</span>(
-      <span class="string">'.carousel-container'</span>,
-      { timer: <span class="primitive">false</span> }
-    )
-  <span><</span>/<span class="operator">script</span><span>></span>
 <span><</span>/<span class="operator">body</span><span>></span>
 
         </code>
@@ -98,30 +110,28 @@ the following default values:
       <pre>
         <code>
 <span><</span><span class="operator">head</span>>
-  <span><</span><span class="operator">script </span><span class="attr">src</span>=<span class="string">"./js/Carousel.js"</span><span>></span>
+  <span><</span>!-- This can be in a separate file if you want --<span>></span>
+  <span><</span><span class="operator">script </span><span class="attr">type</span>=<span class="string">"module"</span><span>></span>
+    // This import assumes you downloaded Carousel.js
+    // and saved it in a folder called js
+    <span class="operator">import</span> Carousel<span class="operator"> from </span><span
+      class="string">'./js/Carousel.js'</span>
+    <span class="operator">new </span><span class="className">Carousel</span>(
+      <span class="string">'.carousel-container'</span>,
+      { timer: <span class="primitive">7000</span>, usesBubbles: <span class="primitive">false</span> }
+    )
+  <span><</span>/<span class="operator">script</span><span>></span>
   <span><</span><span class="operator">link </span><span class="attr">rel</span>=<span class="string">"stylesheet" </span><span class="attr">href</span>=<span class="string">"./css/style.min.css"</span><span>></span>
 <span><</span>/<span class="operator">head</span>>
 <span><</span><span class="operator">body</span>>
   <span><</span><span class="operator">div </span><span class="attr">class</span>=<span class="string">"carousel-container"</span><span>></span>
     <span><</span><span class="operator">div </span><span class="attr">class</span>=<span class="string">"carousel-wrapper"</span><span>></span>
-      
       <span><<span>!-- Each div.carousel-item will be one slide --<span>></span>
       <span><</span><span class="operator">div </span><span class="attr">class</span>=<span class="string">"carousel-item"</span><span>></span>
         <span><</span>!-- Content --<span>></span>
       <span><</span>/<span class="operator">div</span><span>></span>
-
     <span><</span>/<span class="operator">div</span><span>></span>
   <span><</span>/<span class="operator">div</span><span>></span>
-
-  <span><</span><span class="operator">script </span><span class="attr">defer</span><span>></span>
-    <span class="keyword">const</span> carousel<span class="operator"> = new </span><span class="className">Carousel</span>(
-      <span class="string">'.carousel-container'</span>,
-      {
-        timer: <span class="primitive">7000</span>,
-        usesBubbles: <span class="primitive">false</span>
-      }
-    )
-  <span><</span>/<span class="operator">script</span><span>></span>
 <span><</span>/<span class="operator">body</span><span>></span>
         </code>
       </pre>
@@ -134,7 +144,17 @@ the following default values:
       <pre>
         <code>
 <span><</span><span class="operator">head</span>>
-  <span><</span><span class="operator">script </span><span class="attr">src</span>=<span class="string">"./js/Carousel.js"</span><span>></span>
+  <span><</span>!-- This can be in a separate file if you want --<span>></span>
+  <span><</span><span class="operator">script </span><span class="attr">type</span>=<span class="string">"module"</span><span>></span>
+    // This import assumes you downloaded Carousel.js
+    // and saved it in a folder called js
+    <span class="operator">import</span> Carousel<span class="operator"> from </span><span
+      class="string">'./js/Carousel.js'</span>
+    <span class="operator">new </span><span class="className">Carousel</span>(
+      <span class="string">'.carousel-container'</span>,
+      { usesArrows: <span class="primitive">false</span> }
+    )
+  <span><</span>/<span class="operator">script</span><span>></span>
   <span><</span><span class="operator">link </span><span class="attr">rel</span>=<span class="string">"stylesheet" </span><span class="attr">href</span>=<span class="string">"./css/style.min.css"</span><span>></span>
 <span><</span>/<span class="operator">head</span>>
 <span><</span><span class="operator">body</span>>
@@ -148,16 +168,6 @@ the following default values:
 
     <span><</span>/<span class="operator">div</span><span>></span>
   <span><</span>/<span class="operator">div</span><span>></span>
-
-  <span><</span><span class="operator">script </span><span class="attr">defer</span><span>></span>
-    <span class="keyword">const</span> carousel<span class="operator"> = new </span><span class="className">Carousel</span>(
-      <span class="string">'.carousel-container'</span>,
-      {
-        timer: <span class="primitive">7000</span>,
-        usesArrows: <span class="primitive">false</span>
-      }
-    )
-  <span><</span>/<span class="operator">script</span><span>></span>
 <span><</span>/<span class="operator">body</span><span>></span>
         </code>
       </pre>
@@ -192,7 +202,20 @@ the following default values:
       <pre>
         <code>
 <span><</span><span class="operator">head</span>>
-  <span><</span><span class="operator">script </span><span class="attr">src</span>=<span class="string">"./js/Carousel.js"</span><span>></span>
+  <span><</span>!-- This can be in a separate file if you want --<span>></span>
+  <span><</span><span class="operator">script </span><span class="attr">type</span>=<span class="string">"module"</span><span>></span>
+    // This import assumes you downloaded Carousel.js
+    // and saved it in a folder called js
+    <span class="operator">import</span> Carousel<span class="operator"> from </span><span class="string">'./js/Carousel.js'</span>
+    <span class="operator">new </span><span class="className">Carousel</span>(
+      <span class="string">'.carousel-container'</span>,
+      {
+        timer: <span class="primitive">2000</span>,
+        usesBubbles: <span class="primitive">false</span>,
+        usesArrows: <span class="primitive">false</span>
+      }
+    )
+  <span><</span>/<span class="operator">script</span><span>></span>
   <span><</span><span class="operator">link </span><span class="attr">rel</span>=<span class="string">"stylesheet" </span><span class="attr">href</span>=<span class="string">"./css/style.min.css"</span><span>></span>
 <span><</span>/<span class="operator">head</span>>
 <span><</span><span class="operator">body</span>>
@@ -206,29 +229,12 @@ the following default values:
 
     <span><</span>/<span class="operator">div</span><span>></span>
   <span><</span>/<span class="operator">div</span><span>></span>
-
-  <span><</span><span class="operator">script </span><span class="attr">defer</span><span>></span>
-    <span class="keyword">const</span> carousel<span class="operator"> = new </span><span class="className">Carousel</span>(
-      <span class="string">'.carousel-container'</span>,
-      {
-        timer: <span class="primitive">2000</span>,
-        usesArrows: <span class="primitive">false</span>,
-        usesBubbles: <span class="primitive">false</span>
-      }
-    )
-  <span><</span>/<span class="operator">script</span><span>></span>
 <span><</span>/<span class="operator">body</span><span>></span>
         </code>
       </pre>
     </div>
   </section>
 
-  <script defer>
-    const [ timer, usesBubbles, usesArrows ] = [ false, false, false ]
-    const carousel1 = new Carousel('.carousel-1', { timer })
-    const carousel2 = new Carousel('.carousel-2', { timer: 7000, usesBubbles })
-    const carousel3 = new Carousel('.carousel-3', { usesArrows })
-    const carousel4 = new Carousel('.carousel-4', { timer: 2000, usesBubbles, usesArrows })
-  </script>
+
 </body>
 </html>
