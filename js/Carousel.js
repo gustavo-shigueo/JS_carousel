@@ -69,18 +69,13 @@ export default class Carousel {
   }
 
   cicle() {
-    if (this.counter > this.numberOfItems) {
-      const amount = this.itemSize
-      this.counter = 1
-      this.itemsContainer.style.transition = 'none'
-      this.itemsContainer.style.transform = `translateX(-${amount}px)`
-    }
-    if (this.counter <= 0) {
-      const amount = this.itemSize * this.numberOfItems
-      this.counter = this.numberOfItems
-      this.itemsContainer.style.transition = 'none'
-      this.itemsContainer.style.transform = `translateX(-${amount}px)`
-    }
+    let amount = 0
+    if (this.counter <= this.numberOfItems && this.counter > 0) return // Checks if cicle happened
+    [amount, this.counter] = this.counter > this.numberOfItems         // Determines which way to cicle
+      ? [this.itemSize, 1]
+      : [this.itemSize * this.numberOfItems, this.numberOfItems]
+    this.itemsContainer.style.transition = 'none'
+    this.itemsContainer.style.transform = `translateX(-${amount}px)`
   }
 
   /**
